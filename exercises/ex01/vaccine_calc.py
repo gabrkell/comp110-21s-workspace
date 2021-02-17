@@ -1,20 +1,25 @@
 """A vaccination calculator."""
 
-__author__ = "YOUR PID HERE"
+__author__ = "730230246"
 
-# The datetime data type is imported from the datetime library.
-# A datetime object models a specific date and time.
-#
-# Official Documentation: https://docs.python.org/3/library/datetime.html#datetime-objects
 from datetime import datetime
-
-# The timedelta data type is imported from the timedelta library.
-# A timedelta object models a "time span", such as 1 day or 1 hour and 3 minutes.
-# Subtracting two datetime objects will result in the timedelta between them.
-# Adding a datetime and a timedelta will result in the datetime offset by the timedelta.
-#
-# Official Documentation: https://docs.python.org/3/library/datetime.html#datetime.timedelta
 from datetime import timedelta
 
+population: int = int(input("Population: "))
+doses_administered: int = int(input("Doses administered: "))
+doses_per_day: int = int(input("Doses per day: "))
+target_percent: int = int(input("Target percent vaccinated: "))
 
-# Begin your solution here...
+today: datetime = datetime.today()
+one_day: timedelta = timedelta(1)
+
+percent_population = population * target_percent / 100
+already_vaccinated = doses_administered / 2
+still_need_vaccine = percent_population - already_vaccinated 
+days_it_takes = round(still_need_vaccine / (doses_per_day / 2))
+
+days: timedelta = timedelta(days_it_takes)
+future: datetime = today + days
+tp = str(target_percent)
+date = str(future.strftime("%B %d, %Y"))
+print("We will reach " + tp + "% vaccination in " + str(days_it_takes) + " days, which falls on " + date)
